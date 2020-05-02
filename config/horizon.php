@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'domain' => "http://demoapi.kevinliu.top/",
+    'domain' => "http://demoapi.kevinliu.top/horizon",
 
     /*
     |--------------------------------------------------------------------------
