@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -50,6 +51,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        // 自定义验证失败的返回信息
+        if ($exception instanceof ValidationException) {
+            $errors = @$exception->validator->errors()->toArray();
+
+            $msg = [];
+            foreach (array_values($errors) as $array_value) {
+                foreach ($array_value as $item) {
+                    $msg[] = $item;
+                }
+            }
+            $res = [
+                'code' => 422,
+                'msg' => $msg,
+                'data' => []
+            ];
+
+            return response()->json($res)->setStatusCode(422);
+        }
         return parent::render($request, $exception);
     }
 }
