@@ -61,7 +61,7 @@ class TestJob implements ShouldQueue
                 'value' => '¥3299'
             ],
             '3' => [
-                'name' => 'iPd Air 深空灰色 64GB',
+                'name' => 'iPad Air 深空灰色 64GB',
                 'value' => '¥3896'
             ],
             '4' => [
