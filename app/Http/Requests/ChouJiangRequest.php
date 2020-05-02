@@ -40,6 +40,7 @@ class ChouJiangRequest extends FormRequest
     public function messages()
     {
         return [
+            'email.email' => 'email 必须是一个有效的邮箱！',
             'time.after' => '选定的开奖时间必须大于当前时间！！'
         ];
     }

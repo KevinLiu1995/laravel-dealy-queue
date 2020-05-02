@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
             }
             $res = [
                 'code' => 422,
-                'msg' => $msg,
+                'msg' => implode(' ',$msg),
                 'data' => []
             ];
 

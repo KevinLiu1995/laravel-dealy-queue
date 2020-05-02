@@ -11,6 +11,8 @@ class ChouJiangRecord extends Model
     //
     protected $fillable = [
         'prize',
-        'email'
+        'email',
+        'name',
+        'value'
     ];
 }

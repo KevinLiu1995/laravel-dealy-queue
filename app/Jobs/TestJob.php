@@ -25,7 +25,7 @@ class TestJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($delay,$email)
+    public function __construct($delay, $email)
     {
 //        $this->choujiangRecord = $chouJiangRecord;
         $this->email = $email;
@@ -43,13 +43,40 @@ class TestJob implements ShouldQueue
     {
         //延迟执行的逻辑（开奖逻辑）
         $prizeArr = array(
-            '0' => array('id' => 1, 'prize' => '全英雄皮肤', 'v' => 1, 'num' => 1),
-            '1' => array('id' => 2, 'prize' => '单英雄皮肤', 'v' => 2, 'num' => 2),
-            '2' => array('id' => 3, 'prize' => '钻石1000', 'v' => 3, 'num' => 2),
-            '3' => array('id' => 4, 'prize' => '钻石500', 'v' => 15, 'num' => 3),
-            '4' => array('id' => 5, 'prize' => '金币100', 'v' => 20, 'num' => 4),
-            '5' => array('id' => 6, 'prize' => '金币50', 'v' => 78, 'num' => 10),
+            '0' => array('id' => 1, 'prize' => 'Apple Watch Series 5 GPS 深空灰色', 'v' => 110, 'num' => 1),
+            '1' => array('id' => 2, 'prize' => 'iPhone SE 深空灰色 64GB', 'v' => 25, 'num' => 2),
+            '2' => array('id' => 3, 'prize' => 'iPd Air 深空灰色 64GB', 'v' => 300, 'num' => 2),
+            '3' => array('id' => 4, 'prize' => 'iPhone 11 基佬紫色 64GB', 'v' => 16, 'num' => 3),
+            '4' => array('id' => 5, 'prize' => 'iPhone 11 Pro 暗夜绿色 64GB', 'v' => 8, 'num' => 4),
+            '5' => array('id' => 6, 'prize' => 'MacBook Pro 16寸 2.6GHz 6 核处理器 深空灰色 16+512GB', 'v' => 12, 'num' => 10),
         );
+
+        $prize_arr = [
+            '1' => [
+                'name' => 'Apple Watch Series 5 GPS 深空灰色',
+                'value' => '¥3199'
+            ],
+            '2' => [
+                'name' => 'iPhone SE 深空灰色 64GB',
+                'value' => '¥3299'
+            ],
+            '3' => [
+                'name' => 'iPd Air 深空灰色 64GB',
+                'value' => '¥3896'
+            ],
+            '4' => [
+                'name' => 'iPhone 11 基佬紫色 64GB',
+                'value' => '¥5499'
+            ],
+            '5' => [
+                'name' => 'iPhone 11 Pro 暗夜绿色 64GB',
+                'value' => '¥6549'
+            ],
+            '6' => [
+                'name' => 'MacBook Pro 16寸 2.6GHz 6 核处理器 深空灰色 16+512GB',
+                'value' => '¥18999'
+            ]
+        ];
 
         $arr = array();
 
@@ -75,11 +102,19 @@ class TestJob implements ShouldQueue
                 }
             }
         }
+        $name = [];
+        $value = [];
+        foreach ($zj as $item) {
+            $name[] = $prize_arr[$item]['name'];
+            $value[] = $prize_arr[$item]['value'];
+        }
 
         $choujiang = ChouJiangRecord::create([
             'prize' => json_encode($zj),
-//            'email' => $this->email
-            'email' => '863129201@qq.com'
+            'email' => $this->email,
+//            'email' => '863129201@qq.com',
+            'name' => json_encode($name),
+            'value' => json_encode($value),
         ]);
 
         $choujiang->notify(new ChouZhongNotify($choujiang));
